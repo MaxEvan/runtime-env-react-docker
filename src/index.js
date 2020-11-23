@@ -1,11 +1,11 @@
 import React from "react";
 import ReactDOM from "react-dom";
 import reportWebVitals from "./reportWebVitals";
+import { config } from "./config";
 
 ReactDOM.render(
   <React.StrictMode>
-    <p>SUP</p>
-    {/* <p>API_URL: {window._env_.API_URL}</p> */}
+    <pre>{JSON.stringify(config, null, 2)}</pre>
   </React.StrictMode>,
   document.getElementById("root")
 );
