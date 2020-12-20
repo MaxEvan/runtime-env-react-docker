@@ -40,8 +40,9 @@
       To create a production bundle, use `npm run build` or `yarn build`.
     -->
     <script>
-      // This is where the environment variables will be inserted before building the app
-      window.__env__ = %ENV_ANCHOR%
+      // This is where config will be inserted while building the app
+      // based on the env variables passed to the build.
+      window.__env__ = {/* REPLACE_ME */}
     </script>
   </body>
 </html>

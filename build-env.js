@@ -1,16 +1,22 @@
 #!/usr/bin/env node
-const config = {
-  API_URL: process.env.API_URL || null,
-  APP_STAGE: process.env.APP_STAGE || null,
-};
+const configKeys = ["API_URL", "APP_STAGE"];
 
-for (let key in config) {
-  if (config[key] === null) {
-    throw new Error(`Missing environment variable: ${key}`);
+const configObj = {};
+
+// Build a config object to override in the index.html
+for (let key of configKeys) {
+  console.log(key);
+  const currentConfigValue = process.env[key];
+
+  // If there is a value, push it in the config obj
+  if (currentConfigValue) {
+    configObj[key] = currentConfigValue;
   }
 }
 
-const fs = require("fs");
-const index = fs.readFileSync("./public/index.html").toString("utf8");
-const result = index.replace("%ENV_ANCHOR%", JSON.stringify(config));
-fs.writeFileSync("./public/index.html", result);
+if (Object.keys(configObj).length !== 0) {
+  const fs = require("fs");
+  const index = fs.readFileSync("./public/index.html").toString("utf8");
+  const result = index.replace("{/* REPLACE_ME */}", JSON.stringify(configObj));
+  fs.writeFileSync("./public/index.html", result);
+}
