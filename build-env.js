@@ -14,6 +14,6 @@ for (let key of configKeys) {
 }
 
 const fs = require("fs");
-const index = fs.readFileSync("./public/index.html").toString("utf8");
+const index = fs.readFileSync("index.html").toString("utf8");
 const result = index.replace("%REPLACE_ME%", JSON.stringify(configObj));
-fs.writeFileSync("./build/index.html", result);
+fs.writeFileSync("index.html", result);
